@@ -4,15 +4,20 @@ const blockList = [
     "*://*.facebook.com/*",
     "*://*.netflix.com/*",
     "*://*.reddit.com/*",
-    "*://*.youtube.com/*"
+   "*://www.youtube.com/*"
 ];
 
-const redirectUrl = "https://www.google.com"; // URL to redirect to
+const redirectUrl = "https://raw.githubusercontent.com/janvi-kalra/block-extension/main/redirect_to.png"; // URL to redirect to
 
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
-    return {redirectUrl: redirectUrl};
+    const url = new URL(details.url);
+    const params = new URLSearchParams(url.search);
+    if (url.hostname === 'www.youtube.com' && params.get('ab_channel') === 'NeetCode') {
+      return {};  // Don't block NeetCode.
+    }
+    return { cancel: true };
   },
-  {urls: blockList},
+  { urls: blockList },
   ["blocking"]
 );

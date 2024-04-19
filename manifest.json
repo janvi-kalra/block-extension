@@ -1,17 +1,14 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Website Blocker",
   "description": "Blocks specified websites and redirects to a chosen URL.",
   "version": "1.0",
   "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "*://*/*"
+    "<all_urls>"
   ],
   "background": {
-    "service_worker": "background.js"
-  },
-  "host_permissions": [
-    "*://*/*"
-  ]
+    "scripts": ["background.js"]
+  }
 }
