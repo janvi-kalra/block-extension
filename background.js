@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     if (url.hostname === 'www.youtube.com' && params.get('ab_channel') === 'NeetCode') {
       return {};  // Don't block NeetCode.
     }
-    return { cancel: true };
+    return { redirectUrl };
   },
   { urls: blockList },
   ["blocking"]
